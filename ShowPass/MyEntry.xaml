@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="ShowPass.MyEntry"
+		x:Name="MyEntry" Padding="20">
+	
+	<ContentView.Content>
+		<Grid HorizontalOptions="Fill">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			
+			<Entry Text="{Binding Text, Source={x:Reference MyEntry}}" Placeholder="{Binding Placeholder, Source={x:Reference MyEntry}}" IsPassword="{Binding IsPassword, Source={x:Reference MyEntry}}" />
+			<Label Grid.Column="1" Text="{Binding ToggleText, Source={x:Reference MyEntry}}" HorizontalOptions="End" VerticalOptions="Center">
+				<Label.GestureRecognizers>
+					<TapGestureRecognizer Command="{Binding ShowPasswordCommand, Source={x:Reference MyEntry}}"/>
+				</Label.GestureRecognizers>
+			</Label>
+		</Grid>
+	</ContentView.Content>
+	
+</ContentView>
