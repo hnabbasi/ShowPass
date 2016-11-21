@@ -4,6 +4,9 @@
 		xmlns:controls="clr-namespace:ShowPass;assembly=ShowPass"
 		xmlns:local="clr-namespace:ShowPass" 
 		x:Class="ShowPass.ShowPassPage">
+	<StackLayout>
+	<controls:MyEntry Text="Welcome" VerticalOptions="Center" HorizontalOptions="Fill" />
 	
-	<controls:MyEntry Text="Welcome to Xamarin Forms!" VerticalOptions="Center" HorizontalOptions="Fill" />
+	<controls:MyEntry IsPassword="true" VerticalOptions="Center" HorizontalOptions="Fill" />
+	</StackLayout>
 </ContentPage>

@@ -13,7 +13,6 @@ namespace ShowPass
         public MyEntry ()
         {
             InitializeComponent ();
-            IsPassword = true;
         }
 
         public static BindableProperty TextProperty = BindableProperty.Create (nameof (Text), typeof (string), typeof (MyEntry), default (string));
@@ -30,11 +29,24 @@ namespace ShowPass
             set { SetValue (PlaceholderProperty, value); }
         }
 
-        public static BindableProperty IsPasswordProperty = BindableProperty.Create (nameof (IsPassword), typeof (bool), typeof (MyEntry), default (bool));
+        public static BindableProperty IsPasswordProperty = BindableProperty.Create (nameof (IsPassword), typeof (bool), typeof (MyEntry), default (bool), propertyChanged:IsPasswordChanged);
 
         public bool IsPassword {
             get { return (bool)GetValue (IsPasswordProperty); }
             set { SetValue (IsPasswordProperty, value); }
+        }
+
+        static void IsPasswordChanged (BindableObject bindable, object oldValue, object newValue)
+        {
+            var me = bindable as MyEntry;
+            me.IsPasswordEntry = (bool)newValue;
+        }
+
+        public static BindableProperty IsPasswordEntryProperty = BindableProperty.Create (nameof (IsPasswordEntry), typeof (bool), typeof (MyEntry), default (bool));
+
+        public bool IsPasswordEntry {
+            get { return (bool)GetValue (IsPasswordEntryProperty); }
+            set { SetValue (IsPasswordEntryProperty, value); }
         }
 
         private string _toggleText = Show;
@@ -52,10 +64,10 @@ namespace ShowPass
         {
             if (string.Equals (ToggleText, Show)) {
                 ToggleText = Hide;
-                IsPassword = false;
+                IsPasswordEntry = false;
             } else {
                 ToggleText = Show;
-                IsPassword = true;
+                IsPasswordEntry = true;
             }
         }
 
